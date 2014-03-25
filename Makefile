@@ -1,6 +1,10 @@
 
 EMSCRIPTEN=$(HOME)/emscripten
 
+build: healpix.js
+	cat src/start.js healpix.js src/end.js > healpix2.js
+	mv healpix2.js healpix.js
+
 healpix.js: Healpix_3.11
 	$(EMSCRIPTEN)/emcc Healpix_3.11/src/C/subs/chealpix.c -o healpix.js -s EXPORTED_FUNCTIONS="[ \
 		'_ang2vec', \
@@ -51,10 +55,5 @@ Healpix_3.11_2013Apr24.tar.gz:
 	curl -L "http://downloads.sourceforge.net/project/healpix/Healpix_3.11/Healpix_3.11_2013Apr24.tar.gz" -o "Healpix_3.11_2013Apr24.tar.gz"
 	
 clean:
-	rm -rf wcslib
-	rm wcslib.js
-	rm wcs.js
-	rm wcs.min.js
-
-tests:
-	gcc test/create_tests.c -lwcs -lcfitsio -lm
+	rm healpix.js
+	rm healpix.js.map

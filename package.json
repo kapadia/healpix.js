@@ -1,0 +1,24 @@
+{
+  "name": "healpix.js",
+  "version": "0.0.1",
+  "description": "HEALPix in JavaScript",
+  "author": "Amit Kapadia <akapad@gmail.com>",
+  "keywords": [
+    "astronomy",
+    "healpix",
+    "emscripten",
+    "science"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kapadia/healpix.js.git"
+  },
+  "scripts": {
+    "test": "nodeunit tests/healpixjs_test.js"
+  },
+  "devDependencies": {
+    "http-server": "0.5.x",
+    "uglify-js": "2.4.x",
+    "nodeunit": "0.8.x"
+  }
+}

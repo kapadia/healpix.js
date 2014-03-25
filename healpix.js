@@ -1,4 +1,4 @@
-// Note: Some Emscripten settings will significantly limit the speed of the generated code.
+(function () {// Note: Some Emscripten settings will significantly limit the speed of the generated code.
 // Note: Some Emscripten settings may limit the speed of the generated code.
 // The Module object: Our interface to the outside world. We import
 // and export values on it, and do the work to get that through
@@ -12789,4 +12789,37 @@ if (Module['noInitialRun']) {
 run();
 // {{POST_RUN_ADDITIONS}}
 // {{MODULE_ADDITIONS}}
-//@ sourceMappingURL=healpix.js.map
+//@ sourceMappingURL=healpix.js.map  
+  function healpix() {
+    // void nest2ring(long nside, long ipnest, long *ipring)
+    // void ring2nest(long nside, long ipring, long *ipnest)
+    this._nest2ring = Module.cwrap('nest2ring', '', ['number', 'number', 'number']);
+    this._ring2nest = Module.cwrap('ring2nest', '', ['number', 'number', 'number']);
+    
+    this.longPtr = Module._malloc(4);
+  }
+  
+  healpix.prototype.nest2ring = function(nside, ipnest) {
+    this._nest2ring(nside, ipnest, this.longPtr);
+    
+    var ipring = new Uint32Array(Module.HEAPU8.buffer, this.longPtr, 1);
+    return ipring[0];
+  }
+  
+  healpix.prototype.ring2nest = function(nside, ipring) {
+    this._ring2nest(nside, ipring, this.longPtr);
+    var ipnest = new Uint32Array(Module.HEAPU8.buffer, this.longPtr, 1);
+    
+    return ipnest[0];
+  }
+  
+  healpix.version = '0.0.1';
+  
+  if (typeof module !== 'undefined' && module.exports) {
+    module.exports = healpix;
+  }
+  else {
+    window.healpix = healpix;
+  }
+
+}());
