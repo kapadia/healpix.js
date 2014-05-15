@@ -2,7 +2,7 @@
 
 var fs = require('fs');
 var path = require('path');
-var HEALPix = require('../healpix');
+()
 
 // void ang2vec(double theta, double phi, double *vec);
 // void vec2ang(const double *vec, double *theta, double *phi);
@@ -36,12 +36,11 @@ exports['healpixjs_test'] = {
   'ang2vec': function(test) {
     var hp = new HEALPix();
     var vec = hp.ang2vec(0.25 * Math.PI, Math.PI);
-    console.log(vec);
-    
     
     test.equal(vec[0].toFixed(9), -0.707106781)
     test.equal(vec[1].toFixed(9), 8.6595605623549316e-17)
     test.equal(vec[2].toFixed(9), 0.707106781)
+    
     test.done();
   },
   

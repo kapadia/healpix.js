@@ -1,5 +1,7 @@
 
-EMSCRIPTEN=$(HOME)/emscripten
+
+EMSCRIPTEN=$(HOME)/Downloads/emsdk_portable/emscripten/1.16.0
+
 
 build: healpix.js
 	cat src/start.js healpix.js src/end.js > healpix2.js
@@ -55,5 +57,5 @@ Healpix_3.11_2013Apr24.tar.gz:
 	curl -L "http://downloads.sourceforge.net/project/healpix/Healpix_3.11/Healpix_3.11_2013Apr24.tar.gz" -o "Healpix_3.11_2013Apr24.tar.gz"
 	
 clean:
-	rm healpix.js
-	rm healpix.js.map
+	rm -f healpix.js
+	rm -f healpix.js.map
